@@ -1,8 +1,15 @@
 <template>
-  <li class="taskitem">
-    <div>{{ task.task }}</div>
-    <div>{{ task.tag }}</div>
-  </li>
+    <v-list-item two-line>
+        <template v-slot:default="{ active }">
+            <v-list-item-action>
+              <v-checkbox :input-value="active"></v-checkbox>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>{{task.task}}</v-list-item-title>
+              <v-list-item-subtitle>{{task.tag}}</v-list-item-subtitle>
+            </v-list-item-content>
+          </template>
+    </v-list-item>
 </template>
 
 <script>

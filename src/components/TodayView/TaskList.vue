@@ -1,50 +1,58 @@
 <template>
-<div>
-  <ul class="tasklist">
-    TaskList Today
-    <task-item v-for="(task, index) in todayTasks" v-bind:key="index" :task="task"></task-item>
-  </ul>
-  <ul class="tasklist dailies">
-    TaskList Dailies
-    <task-item v-for="(task, index) in dailies" v-bind:key="index" :task="task"></task-item>
-  </ul>
+  <div>
+    <ul class="tasklist">
+      TaskList Today
+      <task-item
+        v-for="(task, index) in todayTasks"
+        v-bind:key="index"
+        :task="task"
+      ></task-item>
+    </ul>
+    <ul class="tasklist dailies">
+      TaskList Dailies
+      <task-item
+        v-for="(task, index) in dailies"
+        v-bind:key="index"
+        :task="task"
+      ></task-item>
+    </ul>
   </div>
 </template>
 
 <script>
-import TaskItem from './TaskItem.vue';
+import TaskItem from "./TaskItem.vue";
 export default {
   components: { TaskItem },
   name: "TaskList",
   data: () => ({
     taskItems: [
-        {
-            task: "Do your homework",
-            tag: "work",
-            repeat: null
-        },
-        {
-            task: "Do your homework 2",
-            tag: "work",
-            repeat: null
-        },
-        {
-            task: "make your bed",
-            tag: "home",
-            repeat: 'daily'
-        }
+      {
+        task: "Do your homework",
+        tag: "work",
+        repeat: null
+      },
+      {
+        task: "Do your homework 2",
+        tag: "work",
+        repeat: null
+      },
+      {
+        task: "make your bed",
+        tag: "home",
+        repeat: "daily"
+      }
     ]
   }),
   computed: {
     dailies() {
-        return this.taskItems.filter(task => {
-            return task.repeat === 'daily'
-        })
+      return this.taskItems.filter(task => {
+        return task.repeat === "daily";
+      });
     },
-    todayTasks(){
-       return this.taskItems.filter(task => {
-            return task.repeat === null
-        }) 
+    todayTasks() {
+      return this.taskItems.filter(task => {
+        return task.repeat === null;
+      });
     }
   }
 };

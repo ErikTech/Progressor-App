@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import TaskList from "./TaskList.vue"
+import TaskList from "./TaskList.vue";
 
 export default {
   components: { TaskList },
@@ -16,6 +16,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
-.dayview 
+.dayview
   border: 1px solid red
 </style>

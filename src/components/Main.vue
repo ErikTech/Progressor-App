@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import DayView from './TodayView/DayView.vue';
+import DayView from "./TodayView/DayView.vue";
 export default {
   components: { DayView },
   name: "Main"

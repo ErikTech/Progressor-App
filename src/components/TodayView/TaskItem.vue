@@ -1,14 +1,14 @@
 <template>
   <li class="taskitem">
-    <div>{{task.task}}</div>
-    <div>{{task.tag}}</div>
+    <div>{{ task.task }}</div>
+    <div>{{ task.tag }}</div>
   </li>
 </template>
 
 <script>
 export default {
   name: "Task",
-   props: {
+  props: {
     task: Object
   }
 };

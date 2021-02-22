@@ -1,5 +1,7 @@
 # progressor-app
 
+This is the process of me building a new app for tracking my progress in work, home, life, and everything else I could use charts and such for.
+
 ## Project setup
 ```
 npm install

@@ -1,15 +1,17 @@
 <template>
   <div class="dayview">
     Day View
+    <chart-container></chart-container>
     <task-list></task-list>
   </div>
 </template>
 
 <script>
+import ChartContainer from '../chartContainer.vue';
 import TaskList from "./TaskList.vue";
 
 export default {
-  components: { TaskList },
+  components: { TaskList, ChartContainer },
   name: "DayView"
 };
 </script>

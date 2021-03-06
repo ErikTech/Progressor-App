@@ -2,21 +2,24 @@
   <v-list>
     <div class="tasklist">
       <v-subheader>Today Tasks</v-subheader>
-      <v-list-item-group v-model="todayTasks" multiple active-class="">
+      <v-list-item-group multiple active-class="">
         <task-item
           v-for="(task, index) in todayTasks"
           v-bind:key="index"
           :task="task"
+          @removeTask="removeTask"
+
         ></task-item>
       </v-list-item-group>
     </div>
     <div class="tasklist dailies">
       <v-subheader>Daily Tasks</v-subheader>
-      <v-list-item-group v-model="dailies" multiple active-class="">
+      <v-list-item-group  multiple active-class="">
         <task-item
           v-for="(task, index) in dailies"
           v-bind:key="index"
           :task="task"
+          @remove-task="removeTask"
         ></task-item>
       </v-list-item-group>
     </div>
@@ -29,36 +32,26 @@ export default {
   components: { TaskItem },
   name: "TaskList",
   data: () => ({
-    taskItems: [
-      {
-        task: "Do your homework",
-        tag: "work",
-        repeat: null,
-      },
-      {
-        task: "Do your homework 2",
-        tag: "work",
-        repeat: null,
-      },
-      {
-        task: "make your bed",
-        tag: "home",
-        repeat: "daily",
-      },
-    ],
+  
   }),
   computed: {
+    taskItems() {
+        return this?.$store?.getters?.allTaskItems || [];
+    },
     dailies() {
-      return this.taskItems.filter((task) => {
-        return task.repeat === "daily";
-      });
+        return this?.$store?.getters?.dailies|| [];
     },
     todayTasks() {
-      return this.taskItems.filter((task) => {
-        return task.repeat === null;
-      });
+        return this?.$store?.getters?.todayTasks || [];
     },
   },
+  methods: {
+    removeTask(task){
+        console.log(task.id);
+        this.$store.dispatch('removeTask', task.id)
+    }
+  }
+
 };
 </script>
 

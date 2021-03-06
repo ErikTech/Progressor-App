@@ -8,7 +8,10 @@
 import DayView from "./TodayView/DayView.vue";
 export default {
   components: { DayView },
-  name: "Main"
+  name: "Main",
+  mounted(){
+    this.$store.dispatch('loadUserTasks');
+  }
 };
 </script>
 

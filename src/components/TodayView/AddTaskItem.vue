@@ -3,8 +3,8 @@
     <v-container>
       <v-row>
         <v-col
-          cols="12"
-          sm="12"
+          cols="6"
+          sm="6"
         >
           <v-text-field
             v-model="taskName"
@@ -12,9 +12,20 @@
             filled
           ></v-text-field>
         </v-col>
-        <v-col>
+        <v-col cols="1">
           <v-btn @click="addTask">Add</v-btn>
         </v-col>
+           <v-col
+        class="d-flex"
+        cols="5"
+        sm="5"
+      >
+        <v-select
+          v-model="taskTag"
+          :items="categories"
+          label="Category"
+        ></v-select>
+      </v-col>
       </v-row>
     </v-container>
   </v-form>
@@ -24,11 +35,23 @@
 export default {
   name: "AddTask",
   data: () => ({
-    taskName: ''
+    taskName: '',
+    taskTag: '',
+    taskRepeatStatus: null,
   }),
+  computed: {
+    categories(){
+      return ['Work','Home','Fitness','Dev','Learn']
+    }
+  },
   methods: {
     addTask(){
-      console.log(this.taskName)
+      const taskInfo = {
+        task: this.taskName,
+        tag: this.taskTag,
+        repeat: this.taskRepeatStatus
+      }
+      this.$store.dispatch('addTask', taskInfo)
     }
   }
 };

@@ -12,7 +12,7 @@
     </div>
     <div class="tasklist dailies">
       <v-subheader>Daily Tasks</v-subheader>
-      <v-list-item-group v-model="dailyTasks" multiple active-class="">
+      <v-list-item-group v-model="dailies" multiple active-class="">
         <task-item
           v-for="(task, index) in dailies"
           v-bind:key="index"

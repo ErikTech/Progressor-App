@@ -1,104 +1,118 @@
 <template>
-    <div class="chart-container">
-        <pie-chart :data="chartData" :options="chartOptions"></pie-chart>
-    </div>
+  <div class="main-container">
+    <v-row>
+      <v-col
+        :cols="12 / chartObjects.length"
+        v-for="(chartObject, index) in chartObjects"
+        :key="'chartcol' + index"
+      >
+        <pie-chart
+          :data="chartObject.data"
+          :options="chartObject.options"
+        ></pie-chart>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
 import PieChart from "./chart.vue";
 
 export default {
-    name: "MainChartContainer",
-    components: {
-        PieChart,
+  name: "MainChartContainer",
+  components: {
+    PieChart,
+  },
+  props: {
+    selectedDayTasks: Object,
+  },
+  data: () => ({
+    // loaded: false,
+    chartOptions: {
+      hoverBorderWidth: 20,
+      title: {
+        display: true,
+        text: "Today's completed tasks",
+      },
     },
-    props: {    
-        // taskItems: Array,
-        selectedDayTasks: Object
+  }),
+  computed: {
+    loaded() {
+      return this.taskItems.length > 0;
     },
-    data: () => ({
-        // loaded: false,
-        chartOptions: {
-            hoverBorderWidth: 20,
-            title: {
-                display: true,
-                text: "Today's completed tasks",
-            },
-        },
-    }),
-    computed: {
-        loaded() {
-            console.log(this.taskItems)
-            return this.taskItems.length > 0;
-        },
-        taskItems(){
-            return this?.selectedDayTasks?.taskList || [];
-        },
-        chartData() {
-            let chartObject = {};
+    taskItems() {
+      return this?.selectedDayTasks?.taskList || [];
+    },
+    chartDataSets() {
+      let datasets = [];
 
-            if (this.loaded) {
-                // get all categories
-                const currentCategories = this.taskItems.map((task) => {
-                    return task.category;
-                });
+      if (this.loaded) {
+        // get all categories
+        const currentCategories = this.taskItems.map((task) => {
+          return task.category;
+        });
 
-                const reducedCategoryList = [...new Set(currentCategories)];
+        const reducedCategoryList = [...new Set(currentCategories)];
 
-                // Count completed points
-                let pts = [];
-                console.log(reducedCategoryList);
-                reducedCategoryList.forEach((element) => {
-                    let totalCount = 0;
-                    let completedCount = 0;
-                    this.taskItems.forEach((task) => {
-                        if (task.category === element) {
-                            totalCount++;
-                            if (task.completed) {
-                                completedCount++;
-                            }
-                        }
-                    });
-                    pts.push({
-                        category: element,
-                        total: totalCount,
-                        incomplete: totalCount - completedCount,
-                        completed: completedCount,
-                    });
-                });
-
-                // Build Datasets
-                let datasets = [];
-                pts.forEach((taskSet) => {
-                    console.log(taskSet);
-                    const set = {
-                        label: taskSet.category,
-                        backgroundColor: ["#41B883", "#ced3e1"],
-                        data: [taskSet.completed, taskSet.incomplete],
-                    };
-                    datasets.push(set);
-                });
-
-                if (datasets.length > 0) {
-                    chartObject = {
-                        hoverBackgroundColor: "red",
-                        hoverBorderWidth: 10,
-                        labels: ["Completed", "Incomplete"],
-                        datasets: datasets,
-                    };
-                }
+        // Count completed points
+        let pts = [];
+        reducedCategoryList.forEach((element) => {
+          let totalCount = 0;
+          let completedCount = 0;
+          this.taskItems.forEach((task) => {
+            if (task.category === element) {
+              totalCount++;
+              if (task.completed) {
+                completedCount++;
+              }
             }
+          });
+          pts.push({
+            category: element,
+            total: totalCount,
+            incomplete: totalCount - completedCount,
+            completed: completedCount,
+          });
+        });
 
-            return chartObject;
-        },
+        // Build Datasets
+        pts.forEach((taskSet) => {
+          const set = {
+            label: taskSet.category,
+            backgroundColor: ["#41B883", "#ced3e1"],
+            data: [taskSet.completed, taskSet.incomplete],
+          };
+          datasets.push(set);
+        });
+      }
+
+      return datasets;
     },
-    //   async mounted() {
-    //     // try {
-
-    //     // } catch (e) {
-    //     //   console.error(e);
-    //     // }
-    //   },
+    chartObjects() {
+      let chartObjects = [];
+      if (this.chartDataSets.length > 0) {
+        for (const set in this.chartDataSets) {
+          let chartObject = {
+            data: {
+              hoverBackgroundColor: "red",
+              hoverBorderWidth: 10,
+              labels: ["Completed", "Incomplete"],
+              datasets: [this.chartDataSets[set]],
+            },
+            options: {
+              hoverBorderWidth: 20,
+              title: {
+                display: true,
+                text: this.chartDataSets[set].label,
+              },
+            },
+          };
+          chartObjects.push(chartObject);
+        }
+      }
+      return chartObjects;
+    },
+  }
 };
 </script>
 

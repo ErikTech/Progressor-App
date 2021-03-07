@@ -16,8 +16,8 @@
         </v-row>
     
         <h1 text-center>Day View - {{ selectedDate }}</h1>
-        <chart-container :selectedDayTasks="selectedDayTasks"></chart-container>
         <division-chart :selectedDayTasks="selectedDayTasks"></division-chart>
+        <chart-container :selectedDayTasks="selectedDayTasks"></chart-container>
         <add-task-item></add-task-item>
         <task-list :selectedDayTasks="selectedDayTasks"></task-list>
     </div>

@@ -3,8 +3,8 @@
     <v-container>
       <v-row>
         <v-col
-          cols="6"
-          sm="6"
+          cols="8"
+          sm="8"
         >
           <v-text-field
             v-model="taskName"
@@ -12,20 +12,26 @@
             filled
           ></v-text-field>
         </v-col>
-        <v-col cols="1">
-          <v-btn @click="addTask">Add</v-btn>
-        </v-col>
+     
            <v-col
         class="d-flex"
-        cols="5"
-        sm="5"
+        cols="3"
+        sm="3"
       >
         <v-select
           v-model="category"
           :items="categories"
           label="Category"
         ></v-select>
+           <v-select
+          v-model="repeatStatus"
+          :items="repeatOptions"
+          label="Repeat"
+        ></v-select>
       </v-col>
+         <v-col cols="1">
+          <v-btn :disabled="buttonDisabled" @click="addTask">Add</v-btn>
+        </v-col>
       </v-row>
     </v-container>
   </v-form>
@@ -36,12 +42,18 @@ export default {
   name: "AddTask",
   data: () => ({
     taskName: '',
-    category: '',
-    repeatStatus: null,
+    category: 'Work',
+    repeatStatus: 'Never'
   }),
   computed: {
     categories(){
       return ['Work','Home','Fitness','Dev','Learn']
+    },
+    repeatOptions(){
+      return ['Never','Daily','Weekly','Monthly']
+    },
+    buttonDisabled(){
+      return !this.taskName.length > 0
     }
   },
   methods: {
@@ -49,7 +61,8 @@ export default {
       const taskInfo = {
         task: this.taskName,
         category: this.category,
-        repeat: this.repeatStatus
+        repeat: this.repeatStatus,
+        date: this.$store.getters.selectedViewableDate
       }
       this.$store.dispatch('addTask', taskInfo)
     }

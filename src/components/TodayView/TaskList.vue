@@ -1,7 +1,7 @@
 <template>
   <v-list>
     <div class="tasklist">
-      <v-subheader>Today Tasks</v-subheader>
+      <v-subheader>{{selectedDayTasks.date}} Tasks</v-subheader>
       <v-list-item-group multiple active-class="">
         <task-item
           v-for="(task, index) in todayTasks"
@@ -19,7 +19,7 @@
           v-for="(task, index) in dailies"
           v-bind:key="index"
           :task="task"
-          @remove-task="removeTask"
+          @removeTask="removeTask"
         ></task-item>
       </v-list-item-group>
     </div>
@@ -32,23 +32,31 @@ export default {
   components: { TaskItem },
   name: "TaskList",
   props: {    
-    taskItems: Array
+    // taskItems: Array,
+    selectedDayTasks: Object,
+    dailies: Array
   },
   computed: {
-    // taskItems() {
-    //     return this?.$store?.getters?.allTaskItems || [];
-    // },
-    dailies() {
-        return this?.$store?.getters?.dailies|| [];
+    taskItems() {
+        console.log(this.selectedDayTasks)
+        return this?.selectedDayTasks?.taskList || [];
     },
+    // dailies() {
+    //   console.log(this.taskItems)
+    //   return this.taskItems.filter(task => task.repeat === "Daily");
+    // },
     todayTasks() {
-        return this?.$store?.getters?.todayTasks || [];
+      return this.taskItems.filter(task => task.repeat === "Never");
     },
   },
   methods: {
     removeTask(task){
         console.log(task.id);
-        this.$store.dispatch('removeTask', task.id)
+        const taskIdentifier = {
+            date: this.selectedDayTasks.date,
+            id: task.id
+        }
+        this.$store.dispatch('removeTask', taskIdentifier)
     }
   }
 

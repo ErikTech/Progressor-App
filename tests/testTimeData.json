@@ -1,0 +1,104 @@
+[
+  {
+    "date": "03/07/2021",
+    "taskList":[ {
+     "task": "Get remove task to work",
+     "category": "Dev",
+     "repeat": "Never",
+     "completed": false,
+     "dateCreated": "03/07/2021",
+     "id": "000000009"
+   },
+   {
+    "task": "1 commit to online repo for app project",
+    "category": "Dev",
+    "repeat": "Daily",
+    "repeatRef": "d000000010",
+    "completed": false,
+    "dateCreated": "03/07/2021",
+    "id": "000000010"
+  },
+   {
+     "task": "Get Add task to work",
+     "category": "Dev",
+     "repeat": "Never",
+     "completed": false,
+     "dateCreated": "03/07/2021",
+     "id": "000000010"
+   }]
+  },
+   {
+     "date": "03/06/2021",
+     "taskList":[ {
+      "task": "Do your homework",
+      "category": "Work",
+      "repeat": "Never",
+      "completed": false,
+      "dateCreated": "03/06/2021",
+      "id": "000000001"
+    },
+    {
+      "task": "Do your homework 2",
+      "category": "Work",
+      "repeat": "Never",
+      "completed": false,
+      "dateCreated": "03/06/2021",
+      "id": "000000002"
+    },
+    {
+        "task": "Do your homework 2",
+        "category": "Home",
+        "repeat": "Daily",
+        "repeatRef": "d000000003",
+        "completed": true,
+        "dateCreated": "03/06/2021",
+        "id": "000000003"
+      },
+      {
+        "task": "Workout",
+        "category": "Fitness",
+        "repeat": "Daily",
+        "repeatRef": "d000000004",
+        "completed": true,
+        "dateCreated": "03/06/2021",
+        "id": "000000004"
+      }]
+   },
+   {
+    "date": "03/05/2021",
+    "taskList":[ {
+     "task": "Do your homework",
+     "category": "Work",
+     "repeat": "Never",
+     "completed": false,
+     "dateCreated": "03/05/2021",
+     "id": "00000005"
+   },
+   {
+     "task": "Do your work 2",
+     "category": "Work",
+     "repeat": "Never",
+     "completed": false,
+     "dateCreated": "03/05/2021",
+     "id": "000000006"
+   },
+   {
+       "task": "Do your homework 88",
+       "category": "Home",
+       "repeat": "Daily",
+       "repeatRef": "d000000007",
+       "completed": true,
+       "dateCreated": "03/05/2021",
+       "id": "000000007"
+     },
+     {
+       "task": "Workout ARMS",
+       "category": "Fitness",
+       "repeat": "Daily",
+       "repeatRef": "d000000008",
+       "completed": true,
+       "dateCreated": "03/05/2021",
+       "id": "000000008"
+     }]
+  }
+]

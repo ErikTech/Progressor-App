@@ -12,8 +12,9 @@ export default {
     components: {
         PieChart,
     },
-    props: {
-        taskItems: Array,
+    props: {    
+        // taskItems: Array,
+        selectedDayTasks: Object
     },
     data: () => ({
         // loaded: false,
@@ -27,7 +28,11 @@ export default {
     }),
     computed: {
         loaded() {
+            console.log(this.taskItems)
             return this.taskItems.length > 0;
+        },
+        taskItems(){
+            return this?.selectedDayTasks?.taskList || [];
         },
         chartData() {
             let chartObject = {};

@@ -1,23 +1,30 @@
 [
     {
       "task": "Do your homework",
-      "tag": "work",
+      "category": "Work",
       "repeat": null,
       "completed": false,
       "id": "000000001"
     },
     {
       "task": "Do your homework 2",
-      "tag": "work",
+      "category": "Work",
       "repeat": null,
       "completed": false,
       "id": "000000002"
     },
     {
         "task": "Do your homework 2",
-        "tag": "work",
+        "category": "Home",
         "repeat": "daily",
-        "completed": false,
+        "completed": true,
         "id": "000000003"
+      },
+      {
+        "task": "Workout",
+        "category": "Fitness",
+        "repeat": "daily",
+        "completed": true,
+        "id": "000000004"
       }
   ]

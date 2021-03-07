@@ -21,7 +21,7 @@
         sm="5"
       >
         <v-select
-          v-model="taskTag"
+          v-model="category"
           :items="categories"
           label="Category"
         ></v-select>
@@ -36,8 +36,8 @@ export default {
   name: "AddTask",
   data: () => ({
     taskName: '',
-    taskTag: '',
-    taskRepeatStatus: null,
+    category: '',
+    repeatStatus: null,
   }),
   computed: {
     categories(){
@@ -48,8 +48,8 @@ export default {
     addTask(){
       const taskInfo = {
         task: this.taskName,
-        tag: this.taskTag,
-        repeat: this.taskRepeatStatus
+        category: this.category,
+        repeat: this.repeatStatus
       }
       this.$store.dispatch('addTask', taskInfo)
     }

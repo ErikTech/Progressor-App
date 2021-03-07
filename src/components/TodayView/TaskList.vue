@@ -31,13 +31,13 @@ import TaskItem from "./TaskItem.vue";
 export default {
   components: { TaskItem },
   name: "TaskList",
-  data: () => ({
-  
-  }),
+  props: {    
+    taskItems: Array
+  },
   computed: {
-    taskItems() {
-        return this?.$store?.getters?.allTaskItems || [];
-    },
+    // taskItems() {
+    //     return this?.$store?.getters?.allTaskItems || [];
+    // },
     dailies() {
         return this?.$store?.getters?.dailies|| [];
     },

@@ -6,7 +6,7 @@
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>{{task.task}}</v-list-item-title>
-              <v-list-item-subtitle>{{task.tag}}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{task.category}}</v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action>
                 <v-btn icon @click="removeTask">

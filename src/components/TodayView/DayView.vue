@@ -1,9 +1,9 @@
 <template>
   <div class="dayview">
-    Day View
-    <chart-container></chart-container>
+    <h1 text-center>Day View</h1>
+    <chart-container :taskItems="taskItems"></chart-container>
     <add-task-item></add-task-item>
-    <task-list></task-list>
+    <task-list :taskItems="taskItems"></task-list>
   </div>
 </template>
 
@@ -14,7 +14,18 @@ import TaskList from "./TaskList.vue";
 
 export default {
   components: { TaskList, ChartContainer, AddTaskItem },
-  name: "DayView"
+  name: "DayView",
+  computed: {
+  taskItems() {
+      return this?.$store?.getters?.allTaskItems || [];
+  },
+  dailies() {
+      return this?.$store?.getters?.dailies|| [];
+  },
+  todayTasks() {
+      return this?.$store?.getters?.todayTasks || [];
+  },
+},
 };
 </script>
 

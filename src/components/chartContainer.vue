@@ -8,7 +8,7 @@
 import PieChart from "./chart.vue";
 
 export default {
-    name: "PieChartContainer",
+    name: "MainChartContainer",
     components: {
         PieChart,
     },

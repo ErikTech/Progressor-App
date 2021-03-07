@@ -51,7 +51,7 @@ export default new Vuex.Store({
       const taskInfo = {
         ...payload,
         id: newID,
-        repeatRef: payload.repeat === "Daily" ? "d"+payload.id : '',
+        repeatRef: payload.repeat === "Daily" ? payload.id : '',
         completed: false,
         dateCreated: state.todaysDate
       }

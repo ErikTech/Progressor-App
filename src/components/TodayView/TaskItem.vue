@@ -2,7 +2,7 @@
     <v-list-item two-line>
         <!-- <template v-slot:default="{ active }"> -->
             <v-list-item-action>
-              <v-checkbox v-model="task.completed" ></v-checkbox> {{task.completed}}
+              <v-checkbox v-model="task.completed" ></v-checkbox>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>{{task.task}}</v-list-item-title>
@@ -35,6 +35,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
-.taskitem
-  border: 1px solid green
+
 </style>

@@ -4,7 +4,7 @@
       <v-subheader>{{selectedDayTasks.date}} Tasks</v-subheader>
       <v-list-item-group multiple active-class="">
         <task-item
-          v-for="(task, index) in todayTasks"
+          v-for="(task, index) in nonRepeatTasks"
           v-bind:key="index"
           :task="task"
           @removeTask="removeTask"
@@ -16,7 +16,7 @@
       <v-subheader>Daily Tasks</v-subheader>
       <v-list-item-group  multiple active-class="">
         <task-item
-          v-for="(task, index) in dailies"
+          v-for="(task, index) in selectedDayDailies"
           v-bind:key="index"
           :task="task"
           @removeTask="removeTask"
@@ -34,7 +34,7 @@ export default {
   props: {    
     // taskItems: Array,
     selectedDayTasks: Object,
-    dailies: Array
+    // dailies: Array
   },
   computed: {
     taskItems() {
@@ -45,7 +45,10 @@ export default {
     //   console.log(this.taskItems)
     //   return this.taskItems.filter(task => task.repeat === "Daily");
     // },
-    todayTasks() {
+    selectedDayDailies() {
+        return this.taskItems.filter(task => task.repeat === "Daily") || [];
+    },
+    nonRepeatTasks() {
       return this.taskItems.filter(task => task.repeat === "Never");
     },
   },
@@ -65,7 +68,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
-.tasklist {
-  border: 1px solid blue;
-}
+// .tasklist {
+//   border: 1px solid blue;
+// }
 </style>

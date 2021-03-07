@@ -17,18 +17,20 @@
     
         <h1 text-center>Day View - {{ selectedDate }}</h1>
         <chart-container :selectedDayTasks="selectedDayTasks"></chart-container>
+        <division-chart :selectedDayTasks="selectedDayTasks"></division-chart>
         <add-task-item></add-task-item>
-        <task-list :selectedDayTasks="selectedDayTasks" :dailies="todaysDailies"></task-list>
+        <task-list :selectedDayTasks="selectedDayTasks"></task-list>
     </div>
 </template>
 
 <script>
 import ChartContainer from "../chartContainer.vue";
+import DivisionChart from '../divisionChart.vue';
 import AddTaskItem from "./AddTaskItem.vue";
 import TaskList from "./TaskList.vue";
 
 export default {
-    components: { TaskList, ChartContainer, AddTaskItem },
+    components: { TaskList, ChartContainer, AddTaskItem, DivisionChart },
     name: "DayView",
     data: () => {
         return {
@@ -86,9 +88,9 @@ export default {
                 this?.$store?.getters?.getTasksByDate(this.todaysDate) || {}
             );
         },
-        todaysDailies() {
-            return this.todaysTasks.taskList.filter(task => task.repeat === "Daily") || [];
-        }
+        // SelectedDayDailies() {
+        //     return this.todaysTasks.taskList.filter(task => task.repeat === "Daily") || [];
+        // }
     },
     methods: {
         changeDate(chosenDate) {
@@ -103,14 +105,7 @@ export default {
         },
         addDailiesToToday() {
             this.dailies.forEach(element => {
-                console.log(element)
-                console.log(this.todaysTasks.taskList)
-                let test = this.todaysTasks.taskList.some(task => {
-                    console.log(task.repeatRef, element.repeatRef)
-                    return task.repeatRef === element.repeatRef
-                })
-                console.log(test)
-                if (!this.todaysTasks.taskList.some(task => task.repeatRef === element.repeatRef)) {
+                if (!this.todaysTasks.taskList.some(task => task.repeatRef === element.repeatRef ) ) {
                     console.log("does not contain" + element.repeatRef)
                     this.$store.dispatch('addTask', element)
                 }

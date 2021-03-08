@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <v-row>
-      <v-col
+      <v-col class="chartCol"
         :cols="12 / chartObjects.length"
         v-for="(chartObject, index) in chartObjects"
         :key="'chartcol' + index"

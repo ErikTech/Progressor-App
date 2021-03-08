@@ -60,8 +60,16 @@ export default new Vuex.Store({
     removeTask({commit}, payload){
       commit('REMOVE_TASK', payload);
     },
-    loadUserTasks({commit}){
+    loadUserTasks({commit, state}){
       const loadedTasks = testTimeData;
+      console.log(loadedTasks)
+      if(loadedTasks.some(e => e.date !== state.todaysDate)){
+        let addTodayObject = {
+          date: state.todaysDate,
+          taskList: []
+        }
+        loadedTasks.push(addTodayObject)
+      }
       commit('LOAD_USER_TASKS', loadedTasks);
     },
     setViewableDate({commit}, payload){
@@ -88,13 +96,16 @@ export default new Vuex.Store({
       return state.taskItems;
     },
     dailies(state) {
-      let dailiesArray = state.taskDatabase.map(e => {
-        let dailies = e.taskList.filter( task => {
-          return task.repeat === "Daily"
+      // if(state.taskDatabase.taskList.length > 0){
+        let dailiesArray = state.taskDatabase.map(e => {
+          let dailies = e?.taskList ? e.taskList.filter( task => {
+            return task.repeat === "Daily"
+          }) : [];
+          return dailies;
         })
-        return dailies;
-      })
-      return dailiesArray.flat()
+        return dailiesArray.flat();
+      // }
+      // return [];
     },
     selectedViewableDate(state){
       return state.selectedDate;

@@ -18,8 +18,38 @@
         <h1 text-center>Day View - {{ selectedDate }}</h1>
         <division-chart :selectedDayTasks="selectedDayTasks"></division-chart>
         <chart-container :selectedDayTasks="selectedDayTasks"></chart-container>
+        <task-list @showAddTaskModal="toggleAddTaskModal" :selectedDayTasks="selectedDayTasks"></task-list>
+      
+    <v-dialog
+      v-model="showAddTaskModal"
+      persistent
+    
+    >
+      <v-card>
+        <v-card-title class="headline">
+         Add new Task
+        </v-card-title>
+
+        <!-- <v-card-text>
+          Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
+        </v-card-text> -->
         <add-task-item></add-task-item>
-        <task-list :selectedDayTasks="selectedDayTasks"></task-list>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            color="green darken-1"
+            text
+            @click="showAddTaskModal = false"
+          >
+            close
+          </v-btn>
+
+        
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     </div>
 </template>
 
@@ -35,6 +65,7 @@ export default {
     data: () => {
         return {
             // selectedDate: ''
+            showAddTaskModal: false
         };
     },
     computed: {
@@ -78,7 +109,7 @@ export default {
         },
         selectedDayTasks() {
             console.log("runs");
-            console.log(this.$store.getters.getTasksByDate(this.selectedDate));
+            // console.log(this.$store.getters.getTasksByDate(this.selectedDate));
             return (
                 this?.$store?.getters?.getTasksByDate(this.selectedDate) || {}
             );
@@ -93,6 +124,9 @@ export default {
         // }
     },
     methods: {
+      toggleAddTaskModal(){
+        this.showAddTaskModal = !this.showAddTaskModal;
+      },
         changeDate(chosenDate) {
             console.log("Going to Date: " + chosenDate);
             this.selectedDate = chosenDate;
@@ -104,6 +138,7 @@ export default {
             this.changeDate(this.$moment(this.selectedDate).add(1, "days"));
         },
         addDailiesToToday() {
+          console.log(this.todaysTasks)
             this.dailies.forEach(element => {
                 if (!this.todaysTasks.taskList.some(task => task.repeatRef === element.repeatRef ) ) {
                     console.log("does not contain" + element.repeatRef)

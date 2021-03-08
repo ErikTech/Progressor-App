@@ -1,7 +1,7 @@
 <template>
   <v-list>
     <div class="tasklist">
-      <v-subheader>{{selectedDayTasks.date}} Tasks</v-subheader>
+      <v-subheader><v-btn @click.stop="showAddTaskModal">Add</v-btn>{{selectedDayTasks.date}} Tasks</v-subheader>
       <v-list-item-group multiple active-class="">
         <task-item
           v-for="(task, index) in nonRepeatTasks"
@@ -36,6 +36,9 @@ export default {
     selectedDayTasks: Object,
     // dailies: Array
   },
+//   data: () => ({
+//       showAddTaskModal: false
+//   }),
   computed: {
     taskItems() {
         console.log(this.selectedDayTasks)
@@ -49,10 +52,14 @@ export default {
         return this.taskItems.filter(task => task.repeat === "Daily") || [];
     },
     nonRepeatTasks() {
-      return this.taskItems.filter(task => task.repeat === "Never");
+        console.log(this.taskItems)
+        return this.taskItems.length > 0 ? this.taskItems.filter(task => task.repeat === "Never") : [];
     },
   },
   methods: {
+    showAddTaskModal(){
+        this.$emit('showAddTaskModal');
+    },
     removeTask(task){
         console.log(task.id);
         const taskIdentifier = {

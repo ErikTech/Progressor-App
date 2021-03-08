@@ -1,27 +1,57 @@
 <template>
   <v-list>
     <div class="tasklist">
-      <v-subheader><v-btn @click.stop="showAddTaskModal">Add</v-btn>{{selectedDayTasks.date}} Tasks</v-subheader>
-      <v-list-item-group multiple active-class="">
+      <v-list-group multiple active-class="" :value="true">
+        <template v-slot:activator>
+          <v-list-item-content>
+            <v-subheader>
+              <v-btn
+                @click.stop="showAddTaskModal"
+                icon
+                style="padding-right: 10px"
+              >
+                <v-icon color="grey darken-2"
+                  >mdi-shape-square-plus</v-icon
+                > </v-btn
+              >{{ selectedDayTasks.date }} Tasks</v-subheader
+            >
+          </v-list-item-content>
+        </template>
+
         <task-item
           v-for="(task, index) in nonRepeatTasks"
           v-bind:key="index"
           :task="task"
           @removeTask="removeTask"
-
         ></task-item>
-      </v-list-item-group>
+      </v-list-group>
     </div>
+    <v-divider></v-divider>
+
     <div class="tasklist dailies">
-      <v-subheader>Daily Tasks</v-subheader>
-      <v-list-item-group  multiple active-class="">
+      <v-list-group multiple active-class="" :value="true">
+        <template v-slot:activator>
+          <v-list-item-content>
+            <v-subheader>
+              <v-btn
+                @click.stop="showAddTaskModal"
+                icon
+                style="padding-right: 10px"
+              >
+                <v-icon color="grey darken-2"
+                  >mdi-shape-square-plus</v-icon
+                > </v-btn
+              >Daily Tasks</v-subheader
+            >
+          </v-list-item-content>
+        </template>
         <task-item
           v-for="(task, index) in selectedDayDailies"
           v-bind:key="index"
           :task="task"
           @removeTask="removeTask"
         ></task-item>
-      </v-list-item-group>
+      </v-list-group>
     </div>
   </v-list>
 </template>
@@ -31,45 +61,46 @@ import TaskItem from "./TaskItem.vue";
 export default {
   components: { TaskItem },
   name: "TaskList",
-  props: {    
+  props: {
     // taskItems: Array,
     selectedDayTasks: Object,
     // dailies: Array
   },
-//   data: () => ({
-//       showAddTaskModal: false
-//   }),
+  //   data: () => ({
+  //       showAddTaskModal: false
+  //   }),
   computed: {
     taskItems() {
-        console.log(this.selectedDayTasks)
-        return this?.selectedDayTasks?.taskList || [];
+      console.log(this.selectedDayTasks);
+      return this?.selectedDayTasks?.taskList || [];
     },
     // dailies() {
     //   console.log(this.taskItems)
     //   return this.taskItems.filter(task => task.repeat === "Daily");
     // },
     selectedDayDailies() {
-        return this.taskItems.filter(task => task.repeat === "Daily") || [];
+      return this.taskItems.filter((task) => task.repeat === "Daily") || [];
     },
     nonRepeatTasks() {
-        console.log(this.taskItems)
-        return this.taskItems.length > 0 ? this.taskItems.filter(task => task.repeat === "Never") : [];
+      console.log(this.taskItems);
+      return this.taskItems.length > 0
+        ? this.taskItems.filter((task) => task.repeat === "Never")
+        : [];
     },
   },
   methods: {
-    showAddTaskModal(){
-        this.$emit('showAddTaskModal');
+    showAddTaskModal() {
+      this.$emit("showAddTaskModal");
     },
-    removeTask(task){
-        console.log(task.id);
-        const taskIdentifier = {
-            date: this.selectedDayTasks.date,
-            id: task.id
-        }
-        this.$store.dispatch('removeTask', taskIdentifier)
-    }
-  }
-
+    removeTask(task) {
+      console.log(task.id);
+      const taskIdentifier = {
+        date: this.selectedDayTasks.date,
+        id: task.id,
+      };
+      this.$store.dispatch("removeTask", taskIdentifier);
+    },
+  },
 };
 </script>
 

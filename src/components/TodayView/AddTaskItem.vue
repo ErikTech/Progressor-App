@@ -53,6 +53,7 @@
           <v-color-picker
             class="ma-2"
             swatches-max-height="200px"
+            v-model="customCategoryColor"
           ></v-color-picker>
         </v-col>
       </v-row>
@@ -69,7 +70,7 @@ export default {
     repeatStatus: 'Never',
     newCategoryName: '',
     customCategoryOption: '+ Add New',
-    customCategoryColor: ''
+    customCategoryColor: '#ffffff'
     
   }),
   computed: {
@@ -81,7 +82,7 @@ export default {
       return ['Never','Daily','Weekly','Monthly']
     },
     buttonDisabled(){
-      return !this.taskName.length > 0 || this.category.name === '+Add New';
+      return !this.taskName.length > 0 || (this.category.name === this.customCategoryOption && this.newCategoryName === '');
     },
     customCategorySelected(){
       console.log(this.category)
@@ -90,14 +91,19 @@ export default {
   },
   methods: {
     addTask(){
+      let customCategory = {};
+      if(this.customCategorySelected){
+        customCategory = {name: this.newCategoryName, color: this.customCategoryColor};
+        this.$store.dispatch('addNewCategory', customCategory)
+      }
       const taskInfo = {
         task: this.taskName,
-        category: this.customCategorySelected ? this.customCategoryOption : this.category,
+        category: this.customCategorySelected ? customCategory : this.category,
         repeat: this.repeatStatus,
         date: this.$store.getters.selectedViewableDate
       }
-      
       this.$store.dispatch('addTask', taskInfo)
+      this.$emit('closeModal');
     }
   }
 };

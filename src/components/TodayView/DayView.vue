@@ -21,6 +21,7 @@
         <task-list @showAddTaskModal="toggleAddTaskModal" :selectedDayTasks="selectedDayTasks"></task-list>
       
     <v-dialog
+      v-if="showAddTaskModal"
       v-model="showAddTaskModal"
       persistent
     
@@ -33,7 +34,7 @@
         <!-- <v-card-text>
           Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
         </v-card-text> -->
-        <add-task-item></add-task-item>
+        <add-task-item @closeModal="toggleAddTaskModal"></add-task-item>
 
         <v-card-actions>
           <v-spacer></v-spacer>

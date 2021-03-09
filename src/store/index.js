@@ -16,6 +16,14 @@ export default new Vuex.Store({
   mutations: {
     LOAD_USER_TASKS(state, payload){
       state.taskDatabase = payload;
+      let categoriesArray = state.taskDatabase.map(e => {
+        let categories = e?.taskList ? e.taskList.map( task => {
+          return task.category
+        }) : [];
+        return categories;
+      })
+      // console.log(categoriesArray)
+      state.categories = categoriesArray.flat();
     },
     ADD_TASK(state, payload){
       state.taskDatabase = state.taskDatabase.map(taskListData => {
@@ -39,7 +47,7 @@ export default new Vuex.Store({
       });
     },
     ADD_NEW_CATEGORY(state, payload){
-      state.categories.push({category: payload.category, color: payload.color})
+      state.categories.push(payload)
     },
     SET_VIEWABLE_DATE(state, payload){
       state.selectedDate = payload;
@@ -77,6 +85,7 @@ export default new Vuex.Store({
         }
         loadedTasks.push(addTodayObject)
       }
+      
       commit('LOAD_USER_TASKS', loadedTasks);
     },
     setViewableDate({commit}, payload){
@@ -115,15 +124,16 @@ export default new Vuex.Store({
       // return [];
     },
     getAllCategories(state) {
+      return state.categories;
       // if(state.taskDatabase.taskList.length > 0){
-        let categoriesArray = state.taskDatabase.map(e => {
-          let categories = e?.taskList ? e.taskList.map( task => {
-            return task.category
-          }) : [];
-          return categories;
-        })
-        console.log(categoriesArray)
-        return categoriesArray.flat();
+        // let categoriesArray = state.taskDatabase.map(e => {
+        //   let categories = e?.taskList ? e.taskList.map( task => {
+        //     return task.category
+        //   }) : [];
+        //   return categories;
+        // })
+        // console.log(categoriesArray)
+        // return categoriesArray.flat();
       // }
       // return [];
     },

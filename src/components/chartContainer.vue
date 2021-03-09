@@ -41,7 +41,7 @@ export default {
   computed: {
       chartStyles(){
           return {
-              maxHeight: '300px',
+              height: '200px',
               position: 'relative'
           }
       },
@@ -119,6 +119,7 @@ export default {
             options: {
               hoverBorderWidth: 20,
               responsive: true,
+              maintainAspectRatio: false,
               title: {
                 display: true,
                 text: this.chartDataSets[set].label,
@@ -140,4 +141,7 @@ export default {
   margin: 0 auto;
   width: 200px;
 }
+.chartCol > div
+    height: 100px
+    position: relative
 </style>

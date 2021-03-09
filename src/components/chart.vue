@@ -8,6 +8,7 @@ export default {
   props: {
     // data: Object,
     options: Object,
+    styles: Object
   },
   watch: {
     // chartData(){

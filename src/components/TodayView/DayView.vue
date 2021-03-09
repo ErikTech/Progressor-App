@@ -7,7 +7,7 @@
                     {{ backOneDay }}
                 </v-btn>
             </v-col>
-            <v-col cols="6">
+            <v-col class="text-right" cols="6">
                 <v-btn v-if="showForwardOneDayButton" @click="goForwardOneDay">
                     {{ forwardOneDay }}
                     <v-icon color="grey lighten-1" style="padding-right: 10px">mdi-arrow-right</v-icon>
@@ -15,7 +15,7 @@
             </v-col>
         </v-row>
     
-        <h1 text-center>Day View - {{ selectedDate }}</h1>
+        <h1 class="text-center">Day View - {{ selectedDate }}</h1>
         <division-chart :selectedDayTasks="selectedDayTasks"></division-chart>
         <chart-container :selectedDayTasks="selectedDayTasks"></chart-container>
         <task-list @showAddTaskModal="toggleAddTaskModal" :selectedDayTasks="selectedDayTasks"></task-list>
@@ -165,6 +165,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
 .dayview {
-  border: 1px solid red;
+  // border: 1px solid red;
 }
 </style>

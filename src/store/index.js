@@ -87,6 +87,10 @@ export default new Vuex.Store({
         completed: false,
         dateCreated: state.todaysDate
       }
+      console.log(taskInfo.category)
+      if(!state.categories.some(cat => cat.name === taskInfo.category.name)){
+        commit('ADD_NEW_CATEGORY', taskInfo.category);
+      }
       commit('ADD_TASK', taskInfo);
     },
     removeTask({commit}, payload){

@@ -22,8 +22,13 @@ export default new Vuex.Store({
         }) : [];
         return categories;
       })
+      console.log(categoriesArray.flat())
+      const removeDuplicateCategories = new Map(categoriesArray.flat().map(item=>{
+        return [item.name,item]
+    }));
+      const reducedCategoryList = [...removeDuplicateCategories.values()]
       // console.log(categoriesArray)
-      state.categories = categoriesArray.flat();
+      state.categories = reducedCategoryList;
     },
     ADD_TASK(state, payload){
       state.taskDatabase = state.taskDatabase.map(taskListData => {

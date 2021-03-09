@@ -84,10 +84,10 @@ export default {
                 .format("MM/DD/YYYY");
         },
         showBackOneDayButton() {
-            return this?.$store?.getters?.getTasksByDate(this.backOneDay);
+            return this.$moment(this.backOneDay).isBefore();
         },
         showForwardOneDayButton() {
-            return this?.$store?.getters?.getTasksByDate(this.forwardOneDay);
+            return this.$moment(this.forwardOneDay).isAfter(this.backOneDay) && !this.$moment(this.selectedDate).isSame(this.todaysDate);
         },
         selectedDate: {
             get() {

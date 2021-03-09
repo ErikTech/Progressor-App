@@ -24,6 +24,9 @@ export default {
   props: {
     task: Object
   },
+  mounted(){
+      console.log(this.task)
+  },
   methods: {
     removeTask(){
         console.log("test")

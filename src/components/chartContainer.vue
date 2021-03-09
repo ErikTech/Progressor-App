@@ -56,14 +56,17 @@ export default {
             return [item.name,item]
         }));
     let reducedCategoryList = [...removeDuplicateCategories.values()]
+    console.log(reducedCategoryList)
 
         // Count completed points
         let pts = [];
         reducedCategoryList.forEach((element) => {
           let totalCount = 0;
           let completedCount = 0;
+          console.log(this.taskItems)
+          console.log(element)
           this.taskItems.forEach((task) => {
-            if (task.category === element) {
+            if (task.category.name === element.name) {
               totalCount++;
               if (task.completed) {
                 completedCount++;
@@ -77,7 +80,7 @@ export default {
             completed: completedCount,
           });
         });
-
+    console.log(pts)
         // Build Datasets
         pts.forEach((taskSet) => {
             console.log(taskSet)
@@ -95,7 +98,9 @@ export default {
     chartObjects() {
       let chartObjects = [];
       if (this.chartDataSets.length > 0) {
+          console.log(this.chartDataSets)
         for (const set in this.chartDataSets) {
+            console.log(set)
           let chartObject = {
             data: {
               hoverBackgroundColor: "red",

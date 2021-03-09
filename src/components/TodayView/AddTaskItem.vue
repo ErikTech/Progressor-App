@@ -22,7 +22,14 @@
           v-model="category"
           :items="categories"
           label="Category"
-        ></v-select>
+          :item-text="category =>`${category.name}`" 
+          return-object
+
+        >
+        <template>
+
+        </template>
+        </v-select>
    
            <v-select
           v-model="repeatStatus"
@@ -58,23 +65,27 @@ export default {
   name: "AddTask",
   data: () => ({
     taskName: '',
-    category: 'Work',
+    category: {name: '', color: ''},
     repeatStatus: 'Never',
     newCategoryName: '',
-    customCategoryOption: '+ Add New'
+    customCategoryOption: '+ Add New',
+    customCategoryColor: ''
+    
   }),
   computed: {
     categories(){
-      return ['Work','Home','Fitness','Dev','Learn', this.customCategoryOption]
+      // console.log(this.$store.getters.getAllCategories)
+      return [...this.$store.getters.getAllCategories, {name: this.customCategoryOption, color: ''}]
     },
     repeatOptions(){
       return ['Never','Daily','Weekly','Monthly']
     },
     buttonDisabled(){
-      return !this.taskName.length > 0 || this.category === '+Add New';
+      return !this.taskName.length > 0 || this.category.name === '+Add New';
     },
     customCategorySelected(){
-      return this.category === this.customCategoryOption;
+      console.log(this.category)
+      return this.category.name === this.customCategoryOption;
     }
   },
   methods: {

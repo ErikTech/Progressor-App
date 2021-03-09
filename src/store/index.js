@@ -117,7 +117,7 @@ export default new Vuex.Store({
     getAllCategories(state) {
       // if(state.taskDatabase.taskList.length > 0){
         let categoriesArray = state.taskDatabase.map(e => {
-          let categories = e?.taskList ? e.taskList.filter( task => {
+          let categories = e?.taskList ? e.taskList.map( task => {
             return task.category
           }) : [];
           return categories;

@@ -10,7 +10,7 @@
      "repeat": "Never",
      "completed": false,
      "dateCreated": "03/07/2021",
-     "id": "000000009"
+     "id": "9"
    },
    {
     "task": "1 commit to online repo for app project",
@@ -19,10 +19,10 @@
       "color": "blue"
     },
     "repeat": "Daily",
-    "repeatRef": "d000000010",
+    "repeatRef": "d10",
     "completed": false,
     "dateCreated": "03/07/2021",
-    "id": "000000010"
+    "id": "10"
   },
    {
      "task": "Get Add task to work",
@@ -33,7 +33,7 @@
      "repeat": "Never",
      "completed": false,
      "dateCreated": "03/07/2021",
-     "id": "000000010"
+     "id": "11"
    }]
   },
    {
@@ -47,7 +47,7 @@
       "repeat": "Never",
       "completed": false,
       "dateCreated": "03/06/2021",
-      "id": "000000001"
+      "id": "1"
     },
     {
       "task": "Do your homework 2",
@@ -58,7 +58,7 @@
       "repeat": "Never",
       "completed": false,
       "dateCreated": "03/06/2021",
-      "id": "000000002"
+      "id": "2"
     },
     {
         "task": "Do your homework 2",
@@ -67,10 +67,10 @@
           "color": "green"
         },
         "repeat": "Daily",
-        "repeatRef": "d000000003",
+        "repeatRef": "d3",
         "completed": true,
         "dateCreated": "03/06/2021",
-        "id": "000000003"
+        "id": "3"
       },
       {
         "task": "Workout",
@@ -79,10 +79,10 @@
         "color": "orange"
       },
         "repeat": "Daily",
-        "repeatRef": "d000000004",
+        "repeatRef": "d4",
         "completed": true,
         "dateCreated": "03/06/2021",
-        "id": "000000004"
+        "id": "4"
       }]
    },
    {
@@ -96,7 +96,7 @@
      "repeat": "Never",
      "completed": false,
      "dateCreated": "03/05/2021",
-     "id": "00000005"
+     "id": "5"
    },
    {
      "task": "Do your work 2",
@@ -107,7 +107,7 @@
      "repeat": "Never",
      "completed": false,
      "dateCreated": "03/05/2021",
-     "id": "000000006"
+     "id": "6"
    },
    {
        "task": "Do your homework 88",
@@ -116,10 +116,10 @@
           "color": "green"
         },
        "repeat": "Daily",
-       "repeatRef": "d000000007",
+       "repeatRef": "d7",
        "completed": true,
        "dateCreated": "03/05/2021",
-       "id": "000000007"
+       "id": "7"
      },
      {
        "task": "Workout ARMS",
@@ -128,10 +128,10 @@
         "color": "orange"
       },
        "repeat": "Daily",
-       "repeatRef": "d000000008",
+       "repeatRef": "d8",
        "completed": true,
        "dateCreated": "03/05/2021",
-       "id": "000000008"
+       "id": "8"
      }]
   }
 ]

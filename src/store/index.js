@@ -15,12 +15,19 @@ export default new Vuex.Store({
   },
   mutations: {
     LOAD_USER_TASKS(state, payload){
-      state.taskDatabase = payload;
+      state.taskDatabase = payload.map(e => { 
+        e.taskList = e.taskList.map(x => {
+          x.id = parseInt(x.id);
+          return x;
+        });
+        return e
+      });
+      console.log(state.taskDatabase.flat())
       let categoriesArray = state.taskDatabase.map(e => {
         let categories = e?.taskList ? e.taskList.map( task => {
           return task.category
         }) : [];
-        return categories;
+        return categories; 
       })
       console.log(categoriesArray.flat())
       const removeDuplicateCategories = new Map(categoriesArray.flat().map(item=>{
@@ -42,6 +49,7 @@ export default new Vuex.Store({
       state.dailyTasks.push(payload)
     },
     REMOVE_TASK(state, payload){
+      console.log(payload)
       state.taskDatabase = state.taskDatabase.map( task => {
         let arrayForDate = task;
         if(task.date === payload.date){
@@ -64,7 +72,8 @@ export default new Vuex.Store({
   actions: {
     addTask({commit, getters, state}, payload){
 
-      const newID = Math.max(getters.IDarray) + 1;
+      const newID = Math.max(getters.IDarray[getters.IDarray.length-1]) + 1;
+      console.log(newID)
       const taskInfo = {
         ...payload,
         id: newID,
@@ -75,6 +84,7 @@ export default new Vuex.Store({
       commit('ADD_TASK', taskInfo);
     },
     removeTask({commit}, payload){
+      console.log(payload)
       commit('REMOVE_TASK', payload);
     },
     addNewCategory({commit}, payload){
@@ -151,6 +161,7 @@ export default new Vuex.Store({
     getTasksByDate: (state) => (date = state.selectedDate) => {
       return state.taskDatabase.find(list => {
         if(list.date === date){
+          console.log(list)
           return list.taskList;
         }
       })

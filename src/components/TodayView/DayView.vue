@@ -110,7 +110,7 @@ export default {
         },
         selectedDayTasks() {
             console.log("runs");
-            // console.log(this.$store.getters.getTasksByDate(this.selectedDate));
+            console.log(this.$store.getters.getTasksByDate(this.selectedDate));
             return (
                 this?.$store?.getters?.getTasksByDate(this.selectedDate) || {}
             );

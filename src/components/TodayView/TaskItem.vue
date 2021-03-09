@@ -5,7 +5,7 @@
               <v-checkbox v-model="task.completed" ></v-checkbox>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>{{task.task}}</v-list-item-title>
+              <v-list-item-title>{{task.task}} - {{task.id}} </v-list-item-title>
               <v-list-item-subtitle :style="`color: ${task.category.color}`">{{task.category.name}}</v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action>
@@ -30,6 +30,7 @@ export default {
   methods: {
     removeTask(){
         console.log("test")
+        console.log(this.task)
         this.$emit('removeTask', this.task)
     }
   }

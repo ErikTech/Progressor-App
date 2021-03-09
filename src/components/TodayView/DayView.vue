@@ -91,7 +91,7 @@ export default {
         },
         selectedDate: {
             get() {
-                console.log(this.$store.getters.selectedViewableDate);
+                // console.log(this.$store.getters.selectedViewableDate);
                 return this.$store.getters.selectedViewableDate || this.todaysDate;
             },
             set(date) {
@@ -105,12 +105,12 @@ export default {
             return this.selectedDayTasks.taskList || [];
         },
         dailies() {
-            console.log(this?.$store?.getters?.dailies)
+            // console.log(this?.$store?.getters?.dailies)
             return this?.$store?.getters?.dailies.filter(task => task.repeat === "Daily") || [];
         },
         selectedDayTasks() {
-            console.log("runs");
-            console.log(this.$store.getters.getTasksByDate(this.selectedDate));
+            // console.log("runs");
+            // console.log(this.$store.getters.getTasksByDate(this.selectedDate));
             return (
                 this?.$store?.getters?.getTasksByDate(this.selectedDate) || {}
             );
@@ -129,7 +129,7 @@ export default {
         this.showAddTaskModal = !this.showAddTaskModal;
       },
         changeDate(chosenDate) {
-            console.log("Going to Date: " + chosenDate);
+            // console.log("Going to Date: " + chosenDate);
             this.selectedDate = chosenDate;
         },
         goBackOneDay() {
@@ -139,10 +139,10 @@ export default {
             this.changeDate(this.$moment(this.selectedDate).add(1, "days"));
         },
         addDailiesToToday() {
-          console.log(this.todaysTasks)
+          // console.log(this.todaysTasks)
             this.dailies.forEach(element => {
                 if (!this.todaysTasks.taskList.some(task => task.repeatRef === element.repeatRef ) ) {
-                    console.log("does not contain" + element.repeatRef)
+                    // console.log("does not contain" + element.repeatRef)
                     this.$store.dispatch('addTask', element)
                 }
             });
@@ -154,7 +154,7 @@ export default {
             this.$moment().format("MM/DD/YYYY")
         );
         this.selectedDate = this.todaysDate;
-        console.log(this.todaysTasks)
+        // console.log(this.todaysTasks)
         await this.addDailiesToToday();
 
 

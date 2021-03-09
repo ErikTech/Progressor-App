@@ -40,7 +40,7 @@ export default {
   }),
   computed: {
     loaded() {
-      console.log(this.taskItems);
+    //   console.log(this.taskItems);
       return this.taskItems.length > 0;
     },
     taskItems() {
@@ -78,15 +78,15 @@ export default {
         let percentages = pts.map((num) => {
           return ((num / totalPts) * 100).toFixed(2);
         });
-        console.log(pts);
-        console.log(totalPts);
-        console.log(pts);
+        // console.log(pts);
+        // console.log(totalPts);
+        // console.log(pts);
         // Build Datasets
 
         let catColors = [... new Set(reducedCategoryList.map(cat => cat.color))];
         let catNames = [...new Set(reducedCategoryList.map(cat => cat.name))];
-        console.log(reducedCategoryList)
-        console.log(catNames)
+        // console.log(reducedCategoryList)
+        // console.log(catNames)
 
 
         const datasets = [
@@ -109,7 +109,7 @@ export default {
           datasets: datasets,
           // };
         };
-        console.log(chartObject);
+        // console.log(chartObject);
       }
 
       return chartObject;

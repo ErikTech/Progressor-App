@@ -85,7 +85,7 @@ export default {
   //   }),
   computed: {
     taskItems() {
-      console.log(this.selectedDayTasks);
+    //   console.log(this.selectedDayTasks);
       return this?.selectedDayTasks?.taskList || [];
     },
     // dailies() {
@@ -96,7 +96,7 @@ export default {
       return this.taskItems.filter((task) => task.repeat === "Daily") || [];
     },
     nonRepeatTasks() {
-      console.log(this.taskItems);
+    //   console.log(this.taskItems);
       return this.taskItems.length > 0
         ? this.taskItems.filter((task) => {
             return !this.selectedDayDailies.includes(task)

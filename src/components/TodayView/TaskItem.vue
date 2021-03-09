@@ -25,11 +25,11 @@ export default {
     task: Object
   },
   mounted(){
-      console.log(this.task)
+    //   console.log(this.task)
   },
   methods: {
     removeTask(){
-        console.log("test")
+        // console.log("test")
         console.log(this.task)
         this.$emit('removeTask', this.task)
     }

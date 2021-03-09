@@ -22,14 +22,14 @@ export default new Vuex.Store({
         });
         return e
       });
-      console.log(state.taskDatabase.flat())
+      // console.log(state.taskDatabase.flat())
       let categoriesArray = state.taskDatabase.map(e => {
         let categories = e?.taskList ? e.taskList.map( task => {
           return task.category
         }) : [];
         return categories; 
       })
-      console.log(categoriesArray.flat())
+      // console.log(categoriesArray.flat())
       const removeDuplicateCategories = new Map(categoriesArray.flat().map(item=>{
         return [item.name,item]
     }));
@@ -52,8 +52,13 @@ export default new Vuex.Store({
       console.log(payload)
       state.taskDatabase = state.taskDatabase.map( task => {
         let arrayForDate = task;
+        console.log(task.id)
         if(task.date === payload.date){
-          let savedInfo = task.taskList.filter(specificTask => specificTask.id !== payload.id)
+          let savedInfo = task.taskList.filter(specificTask => {
+            console.log(specificTask.id, payload.id)
+            return specificTask.id !== payload.id
+          })
+          console.log(savedInfo)
           arrayForDate = {...task, taskList: savedInfo};
         }
         return  arrayForDate;
@@ -72,8 +77,9 @@ export default new Vuex.Store({
   actions: {
     addTask({commit, getters, state}, payload){
 
-      const newID = Math.max(getters.IDarray[getters.IDarray.length-1]) + 1;
-      console.log(newID)
+      console.log(Math.max(...getters.IDarray))
+      const newID = Math.max(...getters.IDarray) + 1;
+      // console.log(newID)
       const taskInfo = {
         ...payload,
         id: newID,
@@ -84,7 +90,7 @@ export default new Vuex.Store({
       commit('ADD_TASK', taskInfo);
     },
     removeTask({commit}, payload){
-      console.log(payload)
+      // console.log(payload)
       commit('REMOVE_TASK', payload);
     },
     addNewCategory({commit}, payload){
@@ -92,9 +98,9 @@ export default new Vuex.Store({
     },
     loadUserTasks({commit, state}){
       const loadedTasks = testTimeData;
-      console.log(loadedTasks)
+      // console.log(loadedTasks)
       if(loadedTasks.some(e => {
-        console.log(e.date, state.todaysDate)
+        // console.log(e.date, state.todaysDate)
         return e.date !== state.todaysDate
       })){
         let addTodayObject = {
@@ -121,6 +127,7 @@ export default new Vuex.Store({
         })
         return ids;
       })
+      console.log(IDarray.flat())
       return IDarray.flat();
     },
     allDailies(state){
@@ -164,7 +171,7 @@ export default new Vuex.Store({
     getTasksByDate: (state) => (date = state.selectedDate) => {
       return state.taskDatabase.find(list => {
         if(list.date === date){
-          console.log(list)
+          // console.log(list)
           return list.taskList;
         }
       })

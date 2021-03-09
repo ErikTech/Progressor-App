@@ -1,13 +1,14 @@
 <template>
   <div class="main-container">
-    <v-row>
+    <v-row v-if="chartObjects">
       <v-col class="chartCol"
         :cols="12 / chartObjects.length"
         v-for="(chartObject, index) in chartObjects"
         :key="'chartcol' + index"
       >
         <pie-chart
-          :data="chartObject.data"
+            :styles="chartStyles"
+          :chart-data="chartObject.data"
           :options="chartObject.options"
         ></pie-chart>
       </v-col>
@@ -28,15 +29,22 @@ export default {
   },
   data: () => ({
     // loaded: false,
-    chartOptions: {
-      hoverBorderWidth: 20,
-      title: {
-        display: true,
-        text: "Today's completed tasks",
-      },
-    },
+    // chartOptions: {
+    //   hoverBorderWidth: 20,
+    //   responsive: true,
+    //   title: {
+    //     display: true,
+    //     text: "Today's completed tasks",
+    //   },
+    // },
   }),
   computed: {
+      chartStyles(){
+          return {
+              maxHeight: '300px',
+              position: 'relative'
+          }
+      },
     loaded() {
       return this.taskItems.length > 0;
     },
@@ -110,6 +118,7 @@ export default {
             },
             options: {
               hoverBorderWidth: 20,
+              responsive: true,
               title: {
                 display: true,
                 text: this.chartDataSets[set].label,

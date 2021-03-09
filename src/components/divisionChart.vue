@@ -1,6 +1,6 @@
 <template>
   <div class="chart-container">
-    <pie-chart :data="chartData" :options="chartOptions"></pie-chart>
+    <pie-chart v-if="chartData.data" :chartData="chartData.data" :options="chartData.options"></pie-chart>
   </div>
 </template>
 
@@ -103,13 +103,15 @@ export default {
 
         // if (datasets.length > 0) {
         chartObject = {
+            data: {
           hoverBackgroundColor: "red",
           hoverBorderWidth: 10,
           labels: [...catNames],
           datasets: datasets,
-          // };
+          },
+          options: this.chartOptions
         };
-        // console.log(chartObject);
+        console.log(chartObject);
       }
 
       return chartObject;

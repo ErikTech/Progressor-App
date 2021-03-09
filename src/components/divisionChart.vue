@@ -55,7 +55,10 @@ export default {
           return task.category;
         });
 
-        const reducedCategoryList = [...new Set(currentCategories)];
+        let removeDuplicateCategories = new Map(currentCategories.map(item=>{
+            return [item.name,item]
+        }));
+    let reducedCategoryList = [...removeDuplicateCategories.values()]
 
         // Count completed points
         let pts = [];
@@ -80,15 +83,17 @@ export default {
         console.log(pts);
         // Build Datasets
 
+        let catColors = [... new Set(reducedCategoryList.map(cat => cat.color))];
+        let catNames = [...new Set(reducedCategoryList.map(cat => cat.name))];
+        console.log(reducedCategoryList)
+        console.log(catNames)
+
+
         const datasets = [
           {
             label: "a",
             backgroundColor: [
-              "#41B883",
-              "red",
-              "#123123",
-              "#ffff00",
-              "#asdasd",
+             ...catColors
             ],
             data: percentages,
           },
@@ -100,7 +105,7 @@ export default {
         chartObject = {
           hoverBackgroundColor: "red",
           hoverBorderWidth: 10,
-          labels: reducedCategoryList,
+          labels: [...catNames],
           datasets: datasets,
           // };
         };

@@ -52,7 +52,10 @@ export default {
           return task.category;
         });
 
-        const reducedCategoryList = [...new Set(currentCategories)];
+          let removeDuplicateCategories = new Map(currentCategories.map(item=>{
+            return [item.name,item]
+        }));
+    let reducedCategoryList = [...removeDuplicateCategories.values()]
 
         // Count completed points
         let pts = [];
@@ -77,9 +80,10 @@ export default {
 
         // Build Datasets
         pts.forEach((taskSet) => {
+            console.log(taskSet)
           const set = {
-            label: taskSet.category,
-            backgroundColor: ["#41B883", "#ced3e1"],
+            label: taskSet.category.name,
+            backgroundColor: [taskSet.category.color, "#ced3e1"],
             data: [taskSet.completed, taskSet.incomplete],
           };
           datasets.push(set);

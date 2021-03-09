@@ -23,6 +23,7 @@
           :items="categories"
           label="Category"
         ></v-select>
+   
            <v-select
           v-model="repeatStatus"
           :items="repeatOptions"
@@ -31,6 +32,21 @@
       </v-col>
          <v-col cols="1">
           <v-btn :disabled="buttonDisabled" @click="addTask">Add</v-btn>
+        </v-col>
+      </v-row>
+      <v-row v-if="customCategorySelected">
+        <v-col>
+              <v-text-field
+            v-model="newCategoryName"
+            label="New Category"
+            filled
+          ></v-text-field>
+        </v-col>
+        <v-col>
+          <v-color-picker
+            class="ma-2"
+            swatches-max-height="200px"
+          ></v-color-picker>
         </v-col>
       </v-row>
     </v-container>
@@ -43,27 +59,33 @@ export default {
   data: () => ({
     taskName: '',
     category: 'Work',
-    repeatStatus: 'Never'
+    repeatStatus: 'Never',
+    newCategoryName: '',
+    customCategoryOption: '+ Add New'
   }),
   computed: {
     categories(){
-      return ['Work','Home','Fitness','Dev','Learn']
+      return ['Work','Home','Fitness','Dev','Learn', this.customCategoryOption]
     },
     repeatOptions(){
       return ['Never','Daily','Weekly','Monthly']
     },
     buttonDisabled(){
-      return !this.taskName.length > 0
+      return !this.taskName.length > 0 || this.category === '+Add New';
+    },
+    customCategorySelected(){
+      return this.category === this.customCategoryOption;
     }
   },
   methods: {
     addTask(){
       const taskInfo = {
         task: this.taskName,
-        category: this.category,
+        category: this.customCategorySelected ? this.customCategoryOption : this.category,
         repeat: this.repeatStatus,
         date: this.$store.getters.selectedViewableDate
       }
+      
       this.$store.dispatch('addTask', taskInfo)
     }
   }

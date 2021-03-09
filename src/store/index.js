@@ -10,7 +10,8 @@ export default new Vuex.Store({
     taskDatabase: [], 
     selectedDate: '',
     todaysDate: '',
-    dailyTasks: []
+    dailyTasks: [],
+    categories: []
   },
   mutations: {
     LOAD_USER_TASKS(state, payload){
@@ -37,6 +38,9 @@ export default new Vuex.Store({
         return  arrayForDate;
       });
     },
+    ADD_NEW_CATEGORY(state, payload){
+      state.categories.push({category: payload.category, color: payload.color})
+    },
     SET_VIEWABLE_DATE(state, payload){
       state.selectedDate = payload;
     },
@@ -59,6 +63,9 @@ export default new Vuex.Store({
     },
     removeTask({commit}, payload){
       commit('REMOVE_TASK', payload);
+    },
+    addNewCategory({commit}, payload){
+      commit('ADD_NEW_CATEGORY', payload);
     },
     loadUserTasks({commit, state}){
       const loadedTasks = testTimeData;
@@ -104,6 +111,19 @@ export default new Vuex.Store({
           return dailies;
         })
         return dailiesArray.flat();
+      // }
+      // return [];
+    },
+    getAllCategories(state) {
+      // if(state.taskDatabase.taskList.length > 0){
+        let categoriesArray = state.taskDatabase.map(e => {
+          let categories = e?.taskList ? e.taskList.filter( task => {
+            return task.category
+          }) : [];
+          return categories;
+        })
+        console.log(categoriesArray)
+        return categoriesArray.flat();
       // }
       // return [];
     },

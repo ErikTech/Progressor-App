@@ -3,7 +3,10 @@
     "date": "03/07/2021",
     "taskList":[ {
      "task": "Get remove task to work",
-     "category": "Dev",
+     "category": {
+       "name": "Dev",
+        "color": "blue"
+      },
      "repeat": "Never",
      "completed": false,
      "dateCreated": "03/07/2021",
@@ -11,7 +14,10 @@
    },
    {
     "task": "1 commit to online repo for app project",
-    "category": "Dev",
+    "category": {
+      "name": "Dev",
+      "color": "blue"
+    },
     "repeat": "Daily",
     "repeatRef": "d000000010",
     "completed": false,
@@ -20,7 +26,10 @@
   },
    {
      "task": "Get Add task to work",
-     "category": "Dev",
+     "category": {
+       "name": "Dev",
+        "color": "blue"
+      },
      "repeat": "Never",
      "completed": false,
      "dateCreated": "03/07/2021",
@@ -31,7 +40,10 @@
      "date": "03/06/2021",
      "taskList":[ {
       "task": "Do your homework",
-      "category": "Work",
+      "category": {
+        "name": "Work",
+        "color": "red"
+      },
       "repeat": "Never",
       "completed": false,
       "dateCreated": "03/06/2021",
@@ -39,7 +51,10 @@
     },
     {
       "task": "Do your homework 2",
-      "category": "Work",
+      "category": {
+        "name": "Work",
+        "color": "red"
+      },
       "repeat": "Never",
       "completed": false,
       "dateCreated": "03/06/2021",
@@ -47,7 +62,10 @@
     },
     {
         "task": "Do your homework 2",
-        "category": "Home",
+        "category": {
+          "name": "Home",
+          "color": "green"
+        },
         "repeat": "Daily",
         "repeatRef": "d000000003",
         "completed": true,
@@ -56,7 +74,10 @@
       },
       {
         "task": "Workout",
-        "category": "Fitness",
+        "category": {
+          "name" : "Fitness",
+        "color": "orange"
+      },
         "repeat": "Daily",
         "repeatRef": "d000000004",
         "completed": true,
@@ -68,7 +89,10 @@
     "date": "03/05/2021",
     "taskList":[ {
      "task": "Do your homework",
-     "category": "Work",
+     "category": {
+       "name": "Work",
+        "color": "red"
+      },
      "repeat": "Never",
      "completed": false,
      "dateCreated": "03/05/2021",
@@ -76,7 +100,10 @@
    },
    {
      "task": "Do your work 2",
-     "category": "Work",
+     "category": {
+       "name": "Work",
+        "color": "red"
+      },
      "repeat": "Never",
      "completed": false,
      "dateCreated": "03/05/2021",
@@ -84,7 +111,10 @@
    },
    {
        "task": "Do your homework 88",
-       "category": "Home",
+       "category": {
+         "name": "Home",
+          "color": "green"
+        },
        "repeat": "Daily",
        "repeatRef": "d000000007",
        "completed": true,
@@ -93,7 +123,10 @@
      },
      {
        "task": "Workout ARMS",
-       "category": "Fitness",
+       "category": {
+         "name" : "Fitness",
+        "color": "orange"
+      },
        "repeat": "Daily",
        "repeatRef": "d000000008",
        "completed": true,

@@ -1,8 +1,22 @@
 <template>
   <v-list>
     <div class="tasklist">
-      <v-list-group multiple active-class="" :value="true">
-        <template v-slot:activator>
+        <v-list-item-content v-if="!(nonRepeatTasks.length > 0)">
+            <v-subheader>
+              <v-btn
+                @click.stop="showAddTaskModal"
+                icon
+                style="padding-right: 10px"
+              >
+                <v-icon color="grey darken-2"
+                  >mdi-shape-square-plus</v-icon
+                > </v-btn
+              >{{ selectedDayTasks.date }} Tasks</v-subheader
+            >
+          </v-list-item-content>
+      <v-list-group v-else multiple active-class="" :value="true">
+          
+        <template  v-slot:activator>
           <v-list-item-content>
             <v-subheader>
               <v-btn
@@ -17,7 +31,7 @@
             >
           </v-list-item-content>
         </template>
-
+        <!-- <task-item v-if="!(nonRepeatTasks.length > 0)"></task-item> -->
         <task-item
           v-for="(task, index) in nonRepeatTasks"
           v-bind:key="index"
@@ -28,7 +42,7 @@
     </div>
     <v-divider></v-divider>
 
-    <div class="tasklist dailies">
+    <div class="tasklist dailies" v-if="selectedDayDailies.length > 0">
       <v-list-group multiple active-class="" :value="true">
         <template v-slot:activator>
           <v-list-item-content>
@@ -84,7 +98,9 @@ export default {
     nonRepeatTasks() {
       console.log(this.taskItems);
       return this.taskItems.length > 0
-        ? this.taskItems.filter((task) => task.repeat === "Never")
+        ? this.taskItems.filter((task) => {
+            return !this.selectedDayDailies.includes(task)
+        })
         : [];
     },
   },

@@ -93,12 +93,15 @@ export default new Vuex.Store({
     loadUserTasks({commit, state}){
       const loadedTasks = testTimeData;
       console.log(loadedTasks)
-      if(loadedTasks.some(e => e.date !== state.todaysDate)){
+      if(loadedTasks.some(e => {
+        console.log(e.date, state.todaysDate)
+        return e.date !== state.todaysDate
+      })){
         let addTodayObject = {
           date: state.todaysDate,
           taskList: []
         }
-        loadedTasks.push(addTodayObject)
+        loadedTasks.unshift(addTodayObject)
       }
       
       commit('LOAD_USER_TASKS', loadedTasks);
